@@ -1,0 +1,34 @@
+#tag Class
+Protected Class App
+Inherits MCPKit.ServerApplication
+	#tag Event , Description = 43616C6C207468697320746F20706572666F726D20616E7920726571756972656420636F6E66696775726174696F6E207374657073206265666F726520746865207365727665722072756E732E2054686973206576656E742069732072616973656420696D6D6564696174656C79206265666F726520746865206052756E2829602062757420616674657220746865206057696C6C50617273654F7074696F6E7328296020616E64206044696450617273654F7074696F6E73282960206576656E742E20596F752073686F756C6420726567697374657220746F6F6C7320696E2074686973206576656E742E
+		Sub Configure()
+		  Self.Name = "mcpfetch"
+		  
+		  RegisterTools(New HTMLFetchTool)
+		  RegisterTools(New MarkdownFetchTool)
+		  
+		End Sub
+	#tag EndEvent
+
+
+	#tag Method, Flags = &h0, Description = 52657475726E7320607360206C696D6974656420746F20606D61784C656E6774686020776F7264732E
+		Function Limit(s As String, maxLength As Integer) As String
+		  /// Returns `s` limited to `maxLength` words.
+		  
+		  If maxLength <= 1 Then Return s
+		  
+		  Var words() As String = s.Split(" ")
+		  
+		  If words.Count <= maxLength Then Return s
+		  
+		  words.ResizeTo(maxLength - 1)
+		  
+		  Return String.FromArray(words, " ")
+		  
+		End Function
+	#tag EndMethod
+
+
+End Class
+#tag EndClass
