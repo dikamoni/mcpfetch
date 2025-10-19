@@ -68,13 +68,13 @@ Inherits MCPKit.Tool
 		  End Try
 		  
 		  Var result As String
-		  If link.ContentType = "text/html" Then
+		  If link.ContentType.Contains("text/html") Then
 		    
 		    Var doc As New HTMLDocument
 		    doc.Parse(link.Contents)
 		    result = HTMLMarkdownConverter.FromHTML(doc, CustomContext(link.ResolvedURL))
 		    
-		  ElseIf link.ContentType = "text/plain" Then
+		  ElseIf link.ContentType.Contains("text/plain") Then
 		    
 		    result = link.Contents
 		    
