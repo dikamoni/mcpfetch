@@ -5,7 +5,10 @@ Inherits MCPKit.ServerApplication
 		Sub Configure()
 		  Self.Name = "mcpfetch"
 		  
-		  RegisterTools(New HTMLFetchTool)
+		  // Disabling HTML fetching for the time being as it really bloats the context window.
+		  // For some reason, LLMs keep preferring HTML instead of Markdown retrieval.
+		  'RegisterTools(New HTMLFetchTool)
+		  
 		  RegisterTools(New MarkdownFetchTool)
 		  
 		End Sub

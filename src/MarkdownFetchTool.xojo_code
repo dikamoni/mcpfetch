@@ -13,12 +13,13 @@ Inherits MCPKit.Tool
 		  
 		  Parameters.Add(url)
 		  
-		  // `maxLength` is an optional integer specifying the maximum length of the result returned. If no value is specified then the
-		  // full contents of the page is returned in Markdown format.
-		  Var maxLen As New MCPKit.ToolParameter("maxLength", MCPKit.ToolParameterTypes.Integer_, _
-		  "The maximum number of characters to return from the tool call. If not specified, the full page in Markdown format is returned", True, 0, False)
-		  
-		  Parameters.Add(maxLen)
+		  // Disabling length limiting because LLMs consistently don't request enough tokens.
+		  ' // `maxLength` is an optional integer specifying the maximum length of the result returned. If no value is specified then the
+		  ' // full contents of the page is returned in Markdown format.
+		  ' Var maxLen As New MCPKit.ToolParameter("maxLength", MCPKit.ToolParameterTypes.Integer_, _
+		  ' "The maximum number of characters to return from the tool call. If not specified, the full page in Markdown format is returned", True, 0, False)
+		  ' 
+		  ' Parameters.Add(maxLen)
 		  
 		End Sub
 	#tag EndMethod
@@ -49,13 +50,13 @@ Inherits MCPKit.Tool
 		  // Get the arguments and their values.
 		  // The MCP server application will have validated that the arguments passed are valid.
 		  Var urlString As String
-		  Var maxLength As Integer
+		  'Var maxLength As Integer
 		  For Each arg As MCPKit.ToolArgument In args
 		    Select Case arg.Name
 		    Case "url"
 		      urlString = arg.Value.StringValue
-		    Case "maxLength"
-		      maxLength = arg.Value.IntegerValue
+		      ' Case "maxLength"
+		      ' maxLength = arg.Value.IntegerValue
 		    End Select
 		  Next arg
 		  
@@ -82,12 +83,14 @@ Inherits MCPKit.Tool
 		    Return ""
 		  End If
 		  
-		  If maxLength >= 0 Then
-		    // Return everything.
-		    Return result
-		  Else
-		    Return App.Limit(result, maxLength)
-		  End If
+		  Return result
+		  
+		  ' If maxLength >= 0 Then
+		  ' // Return everything.
+		  ' Return result
+		  ' Else
+		  ' Return App.Limit(result, maxLength)
+		  ' End If
 		  
 		End Function
 	#tag EndMethod
