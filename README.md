@@ -17,3 +17,4 @@ This is how I use it in my mcp.json file for LM Studio:
 	}
   }
 }
+
